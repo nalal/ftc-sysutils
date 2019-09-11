@@ -24,6 +24,7 @@ namespace fs = std::experimental::filesystem;
 int main(uint8_t argc, char* argv[])
 {
 	bool cleanOut = false;
+	bool validDIR = false;
 	char* dir;
 	for(uint8_t i = 1; i < argc; i++)
 	{
@@ -34,12 +35,21 @@ int main(uint8_t argc, char* argv[])
 		else if(strcmp(argv[i], "-t") == 0)
 		{
 			dir = argv[i+1];
+			validDIR = true;
 		}
 	}
 	int files = 0;
-	for(auto& p: fs::directory_iterator("./"))
+	if(validDIR && fs::exists(dir))
 	{
-		files++;
+		for(auto& p: fs::directory_iterator(dir))
+		{
+			files++;
+		}
+	}
+	else
+	{
+		std::cout << "No directory given.\n";
+		return 0;
 	}
 	if(cleanOut)
 	{
