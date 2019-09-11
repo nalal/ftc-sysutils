@@ -25,6 +25,7 @@ int main(uint8_t argc, char* argv[])
 {
 	bool cleanOut = false;
 	bool validDIR = false;
+	bool recursive = false;
 	char* dir;
 	for(uint8_t i = 1; i < argc; i++)
 	{
@@ -37,13 +38,27 @@ int main(uint8_t argc, char* argv[])
 			dir = argv[i+1];
 			validDIR = true;
 		}
+		else if(strcmp(argv[i], "-r") == 0)
+		{
+			recursive = true;
+		}
 	}
 	int files = 0;
 	if(validDIR && fs::exists(dir))
 	{
-		for(auto& p: fs::directory_iterator(dir))
+		if(recursive)
 		{
-			files++;
+			for(auto& p: fs::recursive_directory_iterator(dir))
+			{
+				files++;
+			}
+		}
+		else
+		{
+			for(auto& p: fs::directory_iterator(dir))
+			{
+				files++;
+			}
 		}
 	}
 	else
