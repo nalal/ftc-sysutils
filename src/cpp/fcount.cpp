@@ -7,7 +7,16 @@
 #include <string.h>
 
 /*
- *
+ *======================================================================
+ *	NAME: 
+ * 		fcount (File Count)
+ * 
+ * 	AUTHOR:
+ * 		Nac/Nalal/Noah
+ * 
+ * 	Usecase:
+ * 		Intended to be used for counting files in a directory
+ *======================================================================
  */
 
 namespace fs = std::experimental::filesystem;
