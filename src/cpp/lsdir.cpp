@@ -9,13 +9,13 @@
 /*
  *======================================================================
  *	NAME: 
- * 		fcount (File Count)
+ * 		lsdir (File Count)
  * 
  * 	AUTHOR:
  * 		Nac/Nalal/Noah
  * 
  * 	Usecase:
- * 		Intended to be used for counting files in a directory
+ * 		Intended to be used for counting directories in a directory
  *======================================================================
  */
 
@@ -44,20 +44,36 @@ int main(uint8_t argc, char* argv[])
 		}
 	}
 	int files = 0;
+	string dirs = "";
 	if(fs::exists(dir))
 	{
+		
 		if(recursive)
 		{
 			for(auto& p: fs::recursive_directory_iterator(dir))
 			{
-				files++;
+				if(is_directory(p))
+				{
+					files++;
+					dirs = 
+						dirs + 
+						"\n  " + 
+						p.path().relative_path().c_str();
+				}
 			}
 		}
 		else
 		{
 			for(auto& p: fs::directory_iterator(dir))
 			{
-				files++;
+				if(is_directory(p))
+				{
+					files++;
+					dirs = 
+						dirs + 
+						"\n  " + 
+						p.path().relative_path().c_str();
+				}
 			}
 		}
 	}
@@ -68,11 +84,11 @@ int main(uint8_t argc, char* argv[])
 	}
 	if(cleanOut)
 	{
-		std::cout << files << "\n";
+		std::cout << dirs << "\n";
 	}
 	else
 	{
-		std::cout << "Total files: " << files << "\n";
+		std::cout << "DIRs(" << files << "): " << dirs << "\n";
 	}
 	return 0;
 }
