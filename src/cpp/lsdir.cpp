@@ -88,7 +88,12 @@ int main(uint8_t argc, char* argv[])
 	}
 	else
 	{
-		std::cout << "DIRs(" << files << "): " << dirs << "\n";
+		std::cout << 
+			"DIRs: " << 
+			dirs << 
+			"\n    Total: "<< 
+			files << 
+			"\n";
 	}
 	return 0;
 }
