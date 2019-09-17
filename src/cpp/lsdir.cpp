@@ -34,13 +34,13 @@ int main(uint8_t argc, char* argv[])
 		{
 			cleanOut = true;
 		}
-		else if(strcmp(argv[i], "-t") == 0)
-		{
-			dir = argv[i+1];
-		}
 		else if(strcmp(argv[i], "-r") == 0)
 		{
 			recursive = true;
+		}
+		else
+		{
+			dir = argv[i];
 		}
 	}
 	int files = 0;
