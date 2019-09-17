@@ -9,7 +9,7 @@
 /*
  *======================================================================
  *	NAME: 
- * 		lsdir (File Count)
+ * 		lsdir (List DIR)
  * 
  * 	AUTHOR:
  * 		Nac/Nalal/Noah
