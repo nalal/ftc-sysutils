@@ -50,14 +50,20 @@ int main(uint8_t argc, char* argv[])
 		{
 			for(auto& p: fs::recursive_directory_iterator(dir))
 			{
-				files++;
+				if(!is_directory(p))
+				{
+					files++;
+				}
 			}
 		}
 		else
 		{
 			for(auto& p: fs::directory_iterator(dir))
 			{
-				files++;
+				if(!is_directory(p))
+				{
+					files++;
+				}
 			}
 		}
 	}
