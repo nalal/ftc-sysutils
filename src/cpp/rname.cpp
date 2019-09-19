@@ -9,13 +9,13 @@
 /*
  *======================================================================
  *	NAME: 
- * 		lsdir (List DIR)
+ * 		rname (ReName)
  * 
  * 	AUTHOR:
  * 		Nac/Nalal/Noah
  * 
  * 	Usecase:
- * 		Intended to be used for counting directories in a directory
+ * 		Intended to be a simple rename utility to rename files
  *======================================================================
  */
 
