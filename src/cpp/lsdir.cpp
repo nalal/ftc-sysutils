@@ -88,6 +88,7 @@ int main(uint8_t argc, char* argv[])
 	}
 	else
 	{
+		system("lsp");
 		std::cout << 
 			"DIRs: " << 
 			dirs << 
