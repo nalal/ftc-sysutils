@@ -22,10 +22,6 @@ namespace fs = std::experimental::filesystem;
 
 int main(uint8_t argc, char* argv[])
 {
-	for(uint8_t i = 1; i < argc; i++)
-	{
-		//Arg handler placeholder
-	}
 	std::cout << 
 		"Current path: \n  " << 
 		fs::current_path() << 
