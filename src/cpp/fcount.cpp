@@ -78,6 +78,7 @@ int main(uint8_t argc, char* argv[])
 	}
 	else
 	{
+		system("lsp");
 		std::cout << "Total files: " << files << "\n";
 	}
 	return 0;
