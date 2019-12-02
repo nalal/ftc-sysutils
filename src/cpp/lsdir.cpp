@@ -14,8 +14,11 @@
  * 	AUTHOR:
  * 		Nac/Nalal/Noah
  * 
- * 	Usecase:
+ * 	USECASE:
  * 		Intended to be used for counting directories in a directory
+ * 
+ * 	EXTERNAL DEPENDANCIES:
+ * 		This application is dependant on the 'lsp' application
  *======================================================================
  */
 
