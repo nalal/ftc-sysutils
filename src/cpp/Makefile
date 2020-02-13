@@ -1,5 +1,10 @@
-main: prep tcount fcount lsdir lsp
+main: prep tcount fcount lsdir lsp yt-audio
 	@echo  [Compiling complete.]
+
+yt-audio:
+	@echo [Building YT-Audio]
+	@echo =Default output folder is '~/music', can be set in source
+	g++ yt-audio.cpp -o bin/yt-audio
 
 tcount:
 	@echo [Building TCOUNT]
