@@ -31,6 +31,6 @@ int main(int argc, char * argv[])
 	{
 		printf("=No URLs provided, halting.\n");
 	}
-	sprintf(save_dir, NULL);
+	//sprintf(save_dir, NULL);
 	return 0;
 }
