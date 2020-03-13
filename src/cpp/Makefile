@@ -22,6 +22,10 @@ lsp:
 	@echo [Building LSP] 
 	g++ lsp.cpp -lstdc++fs -o bin/lsp
 
+droller:
+	@echo [Building LSP] 
+	g++ droller.cpp -lpthread -o bin/droller
+
 prep:
 	@echo [Preparing build folders]
 	mkdir -p bin
