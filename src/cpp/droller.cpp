@@ -85,7 +85,7 @@ int main(int argc, char * argv[])
 		//Check for avaliable threads, wait if none
 		while(threads_available = threads_in_use)
 		{
-			std::this_thread::sleep_for (std::chrono::microseconds(100));
+			std::this_thread::sleep_for std::chrono::microseconds(100));
 		}
 		//Check if value is numeric
 		if(!atoi(argv[i]))
