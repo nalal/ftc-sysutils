@@ -2,6 +2,7 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <time.h>
+#include <sys/time.h>
 
 //C++ includes 
 #include <thread>
@@ -46,7 +47,8 @@ int roll_die(int die_total, int current_die)
 		die_total + 
 		current_die + 
 		threads_available + 
-		threads_in_use
+		threads_in_use +
+		rand()
 	);
 	
 	printf("Rolling die with %i sides\n", die_total);
@@ -64,7 +66,7 @@ int roll_die(int die_total, int current_die)
 
 int main(int argc, char * argv[])
 {
-	printf("Testing d_any.\n");
+	printf("Rolling %i dice.\n", argc - 1);
 	//Check if there are more dice than can be placed into static array
 	if(argc > 256)
 	{
@@ -85,7 +87,7 @@ int main(int argc, char * argv[])
 		//Check for avaliable threads, wait if none
 		while(threads_available = threads_in_use)
 		{
-			std::this_thread::sleep_for std::chrono::microseconds(100));
+			std::this_thread::sleep_for(std::chrono::microseconds(100));
 		}
 		//Check if value is numeric
 		if(!atoi(argv[i]))
