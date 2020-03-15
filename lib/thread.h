@@ -19,7 +19,8 @@ struct threadInfo
 // Functions
 int getThreadsUsed();
 int getThreads();
-void printThreadInfo();
+//void printThreadInfo();
 
 // Vars
-
+int total_threads = std::thread::hardware_concurrency();
+int total_threads_used = 0;
