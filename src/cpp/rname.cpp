@@ -33,20 +33,34 @@ string get_name(char * path, char * name)
 	return new_path;
 }
 
+void print_help()
+{
+	printf("Usage: 'rname <Rename Target> <New Name>'\n");
+}
+
 int main(int argc, char * argv[])
 {
+	for(int i = 1; i < argc; i++)
+	{
+		switch(strcmp(argv[i],"-h"))
+		{
+			case 0:
+				print_help();
+				return 0;
+		}
+	}
 	//Verify that the correct arguments were provided
 	switch(argc)
 	{
+		//If nothing is provided, argc will be 1
 		case 1:
-			printf(
-				"File not provided\n'rname <rename target> <new name>'\n"
-			);
+			printf("File not provided\n");
+			print_help();
 			return 0;
+		//If only file path is provided, argc will be 2
 		case 2:
-			printf(
-				"New name not provided\n'rname <rename target> <new name>'\n"
-			);
+			printf("New name not provided\n");
+			print_help();
 			return 0;
 	}
 	//Verify that the file exists
@@ -57,10 +71,8 @@ int main(int argc, char * argv[])
 			return 0;
 	}
 	string new_name = get_name(argv[1], argv[2]);
-	//printf("%s\n%s", argv[1], new_name.c_str());
 	char command[2550];
 	sprintf(command, "mv %s %s", argv[1], new_name.c_str());
-	printf("%s\n", command);
 	system(command);
 	return 0;
 }
