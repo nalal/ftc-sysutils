@@ -1,4 +1,4 @@
-main: prep tcount fcount lsdir lsp yt-audio droller
+main: prep tcount fcount lsdir lsp yt-audio droller rname
 	@echo  [Compiling complete.]
 
 yt-audio:
@@ -25,6 +25,10 @@ lsp:
 droller:
 	@echo [Building DROLLER] 
 	g++ droller.cpp -lpthread -o bin/droller
+
+rname:
+	@echo [Building RNAME]
+	g++ rname.cpp -lstdc++fs -o bin/rname
 
 prep:
 	@echo [Preparing build folders]
