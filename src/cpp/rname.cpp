@@ -39,17 +39,21 @@ int main(int argc, char * argv[])
 	switch(argc)
 	{
 		case 1:
-			printf("File not provided\n");
+			printf(
+				"File not provided\n'rname <rename target> <new name>'\n"
+			);
 			return 0;
 		case 2:
-			printf("New name not provided\n");
+			printf(
+				"New name not provided\n'rname <rename target> <new name>'\n"
+			);
 			return 0;
 	}
 	//Verify that the file exists
 	switch(fs::exists(argv[1]))
 	{
 		case false:
-			printf("File not found\n");
+			printf("File '%s' not found\n", argv[1]);
 			return 0;
 	}
 	string new_name = get_name(argv[1], argv[2]);
