@@ -40,6 +40,6 @@ clean:
 	
 install:
 	@echo [Installing utilities]
-	mkdir -p ~/lbin
-	cp bin/* ~/lbin
+	mkdir ~/.local/bin -p
+	cp bin/* ~/.local/bin
 	@echo [Utilities installed to \~/lbin]
