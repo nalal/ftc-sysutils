@@ -42,4 +42,4 @@ install:
 	@echo [Installing utilities]
 	mkdir ~/.local/bin -p
 	cp bin/* ~/.local/bin
-	@echo [Utilities installed to \~/lbin]
+	@echo [Utilities installed to \~/.local/bin]
