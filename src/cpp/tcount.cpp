@@ -8,11 +8,11 @@ int main(int argc, int argv)
 {
 	if(argc > 1)
 	{
-		cout << thread::hardware_concurrency();
+		printf("%i", thread::hardware_concurrency());
 	}
 	else
 	{
-		cout << "Total threads: " << thread::hardware_concurrency() << "\n";
+		printf("Total threads: %i\n", thread::hardware_concurrency());
 	}
 	return 0;
 }
