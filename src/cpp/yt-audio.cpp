@@ -9,7 +9,7 @@ int main(int argc, char * argv[])
 	if(argc > 1)
 	{
 		char dir_make[256];
-		printf("=Validating music DIR...");
+		printf("=Validating music DIR...\n");
 		sprintf(dir_make, "mkdir -p %s", save_dir);
 		system(dir_make);
 		sprintf(dir_make, NULL);
