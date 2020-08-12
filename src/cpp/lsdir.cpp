@@ -30,6 +30,7 @@ int main(uint8_t argc, char* argv[])
 {
 	bool cleanOut = false;
 	bool recursive = false;
+	bool show_hidden = false;
 	string dir = "./";
 	for(uint8_t i = 1; i < argc; i++)
 	{
@@ -40,6 +41,10 @@ int main(uint8_t argc, char* argv[])
 		else if(strcmp(argv[i], "-r") == 0)
 		{
 			recursive = true;
+		}
+		else if(strcmp(argv[i], "-a") == 0)
+		{
+			show_hidden = true;
 		}
 		else
 		{
@@ -57,11 +62,14 @@ int main(uint8_t argc, char* argv[])
 			{
 				if(is_directory(p))
 				{
-					files++;
-					dirs = 
-						dirs + 
-						"\n  " + 
-						p.path().relative_path().c_str();
+					if(show_hidden || p.path().filename().c_str()[0] != '.')
+					{
+						files++;
+						dirs = 
+							dirs + 
+							"\n  " + 
+							p.path().filename().c_str();
+					}
 				}
 			}
 		}
@@ -71,11 +79,14 @@ int main(uint8_t argc, char* argv[])
 			{
 				if(is_directory(p))
 				{
-					files++;
-					dirs = 
-						dirs + 
-						"\n  " + 
-						p.path().relative_path().c_str();
+					if(show_hidden || p.path().filename().c_str()[0] != '.')
+					{
+						files++;
+						dirs = 
+							dirs + 
+							"\n  " + 
+							p.path().filename().c_str();
+					}
 				}
 			}
 		}

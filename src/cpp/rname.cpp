@@ -33,6 +33,7 @@ string get_name(char * path, char * name)
 	return new_path;
 }
 
+//Print help string
 void print_help()
 {
 	printf("Usage: 'rname <Rename Target> <New Name>'\n");
