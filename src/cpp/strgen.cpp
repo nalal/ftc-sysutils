@@ -4,7 +4,6 @@
 #include <string.h>
 
 //Maximum length of a generated string
-const int MAX_CHARACTER_GEN = 256;
 //Default length of a string
 const int DEF_LENGTH = 16;
 
@@ -18,7 +17,7 @@ void print_help()
 {
 	printf("USAGE:\n    strgen\n");
 	printf("'-e':\n    Exclude specific characters\n");
-	printf("'-l':\n    String length (max %i)\n", MAX_CHARACTER_GEN);
+	printf("'-l':\n    String length\n");
 }
 
 //Set characters in string as excluded
@@ -59,17 +58,6 @@ int main(int argc, char * argv[])
 			if(i + 1 < argc)
 			{
 				string_length = strtol(argv[i+1], NULL, 10);
-				if(string_length > MAX_CHARACTER_GEN)
-				{
-					if(!silent_mode)
-						printf(
-							"Cannot generate string longer than %i\n", 
-							MAX_CHARACTER_GEN
-						);
-					if(!silent_mode)
-						printf("Generating largest string possible\n");
-					string_length = MAX_CHARACTER_GEN;
-				}
 				if(string_length == 0)
 				{
 					printf("'%s' is not a valid length\n", argv[i+1]);
@@ -98,8 +86,6 @@ int main(int argc, char * argv[])
 	if(!silent_mode)
 		printf("Generating string %i characters long\n", string_length);
 	srand(result);
-	char random_string[MAX_CHARACTER_GEN + 1];
-	random_string[string_length] = '\0';
 	for(int i = 0; i < string_length; i++)
 	{
 		bool valid = false;
@@ -113,8 +99,8 @@ int main(int argc, char * argv[])
 				random = (rand()/65536) % 126;
 			}
 		}
-		random_string[i] = random + 36;
+		printf("%c", random + 36);
 	}
-	printf("%s\n", random_string);
+	printf("\n");
 	return(0);
 }
