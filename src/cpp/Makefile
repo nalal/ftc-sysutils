@@ -42,7 +42,7 @@ clean:
 	@echo [Cleaning build folders]
 	rm -rf bin
 	
-install:
+install: main
 	@echo [Installing utilities]
 	mkdir ~/.local/bin -p
 	cp bin/* ~/.local/bin

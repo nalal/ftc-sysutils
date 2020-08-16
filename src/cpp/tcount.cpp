@@ -2,7 +2,6 @@
 #include <thread>
 
 using std::thread;
-using std::cout;
 
 int main(int argc, int argv)
 {
