@@ -1,4 +1,4 @@
-main: prep tcount fcount lsdir lsp yt-audio droller rname strgen
+main: prep tcount fcount lsdir lsp yt-audio droller rname strgen namefix
 	@echo  [Compiling complete.]
 
 yt-audio:
@@ -33,6 +33,10 @@ droller:
 rname:
 	@echo [Building RNAME]
 	g++ rname.cpp -lstdc++fs -o bin/rname
+
+namefix:
+	@echo [Building NAMEFIX]
+	g++ namefix.cpp -std=gnu++17 -lpthread -o bin/namefix
 
 prep:
 	@echo [Preparing build folders]
