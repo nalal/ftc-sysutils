@@ -39,6 +39,7 @@ namefix:
 	g++ namefix.cpp -std=gnu++17 -lpthread -o bin/namefix
 
 rmn:
+	@echo [Building RMN]
 	g++ rmn.cpp -o bin/rmn -std=gnu++17 
 
 prep:

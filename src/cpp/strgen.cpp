@@ -75,10 +75,10 @@ void print_chars(int chars_to_print)
 	int offset = (chars_to_print % (threads - 1));
 	for(int i = 0; i < thread::hardware_concurrency(); i++)
 	{
-		if(i == threads - 1)
+		if(true)//i == threads - 1)
 			generate_string(chars_to_print, str_ptr, offset);
-		else
-			thread(generate_string, chars_to_print, str_ptr).detach();
+		//else
+		//	thread(generate_string, chars_to_print, str_ptr).detach();
 	}
 	//Print characters to screen
 	printf("%s\n", string_buff);
