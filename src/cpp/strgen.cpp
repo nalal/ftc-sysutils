@@ -1,16 +1,21 @@
+// C includes
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
 
-//Maximum length of a generated string
-//Default length of a string
-const int DEF_LENGTH = 16;
+#include <thread>
 
+//Default length of a string
+const int DEF_LENGTH = 16;;
 //Array of bools for exclusions
 bool exclusions[126 - 36];
 //Print nothing
 bool silent_mode = false;
+//Single thread force
+bool st_mode = false;
+
+using std::thread;
 
 //Print help message
 void print_help()
@@ -18,22 +23,71 @@ void print_help()
 	printf("USAGE:\n    strgen\n");
 	printf("'-e':\n    Exclude specific characters\n");
 	printf("'-l':\n    String length\n");
+	printf("'-t':\n    Single thread mode\n");
 }
 
 //Set characters in string as excluded
 void set_exclusions(char * excluded_chars)
 {
+	//Get length of character array
 	size_t chars = strlen(excluded_chars);
 	for(int i = 0; i < chars - 1; i++)
 	{
+		//Set index as excluded by casting to int for index
 		exclusions[(int)excluded_chars[i] - 36] = true;
 	}
+}
+
+int threads_running = 0;
+
+void generate_string(int to_generate, char* string_buff, int offset = 0)
+{
+	for(int i = 0; i < (to_generate + offset); i++)
+	{
+		//Use time as base for random seed
+		time_t result = time(NULL);
+		bool valid = false;
+		//Seed random with current char number + time
+		srand(result + i);
+		int random = (rand()/65536) % (126 - 36);
+		//Verify if character is not excluded, regen if it is
+		while(!valid)
+		{
+			if(!exclusions[random])
+				valid = true;
+			else
+			{
+				random = (rand()/65536) % 126;
+			}
+		}
+		string_buff[i] = (char)(random + 36);
+	}
+}
+
+//Print total characters to screen
+void print_chars(int chars_to_print)
+{
+	const int c_length = chars_to_print;
+	char string_buff[c_length + 1];
+	char * str_ptr = &string_buff[0];
+	int threads = thread::hardware_concurrency();
+	int print_per = (chars_to_print / (threads - 1));
+	int offset = (chars_to_print % (threads - 1));
+	for(int i = 0; i < thread::hardware_concurrency(); i++)
+	{
+		if(i == threads - 1)
+			generate_string(chars_to_print, str_ptr, offset);
+		else
+			thread(generate_string, chars_to_print, str_ptr).detach();
+	}
+	//Print characters to screen
+	printf("%s\n", string_buff);
 }
 
 int main(int argc, char * argv[])
 {
 	//Length of string to generate
-	int string_length = DEF_LENGTH;
+	int string_length;
 	for(int i = 1; i < argc; i++)
 	{
 		//Exclusion list handler
@@ -49,7 +103,8 @@ int main(int argc, char * argv[])
 			else
 			{
 				if(!silent_mode)
-					printf("'-e' flag given but no exclusions provided\n");
+					printf("'-e' flag given but no exclusions given\n");
+				return 1;
 			}
 		}
 		//Get provided length for string
@@ -61,7 +116,7 @@ int main(int argc, char * argv[])
 				if(string_length == 0)
 				{
 					printf("'%s' is not a valid length\n", argv[i+1]);
-					string_length = DEF_LENGTH;
+					return 1;
 				}
 				i++;
 			}
@@ -77,30 +132,15 @@ int main(int argc, char * argv[])
 			print_help();
 			return 0;
 		}
+		//Quiet mode, disables non-essential output
 		else if(strcmp(argv[i], "-q") == 0)
 		{
 			silent_mode = true;
 		}
 	}
-	time_t result = time(NULL);
 	if(!silent_mode)
 		printf("Generating string %i characters long\n", string_length);
-	srand(result);
-	for(int i = 0; i < string_length; i++)
-	{
-		bool valid = false;
-		int random = (rand()/65536) % (126 - 36);
-		while(!valid)
-		{
-			if(!exclusions[random])
-				valid = true;
-			else
-			{
-				random = (rand()/65536) % 126;
-			}
-		}
-		printf("%c", random + 36);
-	}
+	print_chars(string_length);
 	printf("\n");
 	return(0);
 }

@@ -31,6 +31,5 @@ int main(int argc, char * argv[])
 				sprintf(runline, NULL);
 			}
 	}
-	//sprintf(save_dir, NULL);
 	return 0;
 }
