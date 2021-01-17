@@ -49,11 +49,13 @@ int null_target(const char * file_path)
 	{
 		for(int i = 0; i < st.st_size; i++)
 		{
-			uint8_t null_i = 0;
+			time_t t;
+			srand((unsigned) time(&t));
+			uint8_t null_i = (uint8_t)rand();
 			fwrite(&null_i, sizeof(null_i), 1, n_file);
 		}
 		fclose(n_file);
-		printf("File '%s' nulled\n", file_path);
+		printf("File '%s' scrammed\n", file_path);
 		return 0;
 	}
 	else
