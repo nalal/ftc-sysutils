@@ -1,10 +1,10 @@
-main: prep tcount fcount lsdir lsp yt-audio droller rname strgen namefix rmn
+main: prep tcount fcount lsdir lsp yt-audio droller rname strgen namefix rmn sexec
 	@echo  [Compiling complete.]
 
 yt-audio:
 	@echo [Building YT-Audio]
 	@echo =Default output folder is '~/music', can be set in source
-	g++ yt-audio.cpp -o bin/yt-audio
+	g++ --static yt-audio.cpp -o bin/yt-audio
 
 strgen:
 	@echo [Building STRGEN]
@@ -23,11 +23,11 @@ lsdir:
 	g++ lsdir.cpp -lstdc++fs -o bin/lsdir
 
 lsp:
-	@echo [Building LSP] 
+	@echo [Building LSP]
 	g++ lsp.cpp -lstdc++fs -o bin/lsp
 
 droller:
-	@echo [Building DROLLER] 
+	@echo [Building DROLLER]
 	g++ droller.cpp -lpthread -o bin/droller
 
 rname:
@@ -40,7 +40,11 @@ namefix:
 
 rmn:
 	@echo [Building RMN]
-	g++ rmn.cpp -o bin/rmn -std=gnu++17 
+	g++ rmn.cpp -o bin/rmn -std=gnu++17
+
+sexec:
+	@echo [Building SEXEC]
+	g++ sexec.cpp -o bin/sexec
 
 prep:
 	@echo [Preparing build folders]
@@ -49,9 +53,9 @@ prep:
 clean:
 	@echo [Cleaning build folders]
 	rm -rf bin
-	
+
 install: main
 	@echo [Installing utilities]
-	mkdir ~/.local/bin -p
-	cp bin/* ~/.local/bin
+	#mkdir ~/.local/bin -p
+	cp bin/* /bin
 	@echo [Utilities installed to \~/.local/bin]
