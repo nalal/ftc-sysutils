@@ -3,13 +3,18 @@
 namespace fs = std::filesystem;
 using std::thread;
 
-bool match_char(char check_char)
+bool match_char(char check_char, bool v_char_found)
 {
 	switch(check_char)
 	{
 		case '_':
-			return true;
+			if(v_char_found == true)
+				return true;
+			else
+				return false;
 		case '/':
+			return true;
+		case '-':
 			return true;
 		case '.':
 			return true;
@@ -18,11 +23,14 @@ bool match_char(char check_char)
 	}
 }
 
-bool is_valid_char(char check_char)
+bool is_valid_char(char check_char, bool v_char_found)
 {
 	if(isalpha(check_char) || isdigit(check_char))
+	{
+		//printf("isalfa\n");
 		return true;
-	else if(match_char(check_char))
+	}
+	else if(match_char(check_char, v_char_found))
 		return true;
 	else
 		return false;
@@ -33,18 +41,25 @@ void run_fix(char * fix_name)
 	printf("Fixing name for '%s'.\n", fix_name);
 	char file_name[2550];
 	memcpy(file_name, strrchr(fix_name, '/'), 2550 * sizeof(char));
+	bool valid_char_found = false;
+	int f_valid_index = 0;
 	for(int i = 0; file_name[i] != '\0'; i++)
 	{
-		if(!is_valid_char(file_name[i]))
+		if(!is_valid_char(file_name[i], valid_char_found))
 			file_name[i] = '_';
+		else if(!valid_char_found && i > 0)
+		{
+			f_valid_index = i;
+			valid_char_found = true;
+		}
 	}
-	printf("%s\n", file_name);
+	char * v_name = file_name + f_valid_index;
+	printf("%s\n", v_name);
 	char cur_path[25500];
-	memcpy(cur_path, fix_name, 2550 * sizeof(char));
+	memcpy(cur_path, fix_name, 2550 * sizeof(fix_name));
 	strrchr(cur_path, '/')[0] = '\0';
 	char final_name[25500];
-	sprintf(final_name, "%s%s", cur_path, file_name);
-	//memmove(&file_name[0], &file_name[1], strlen(file_name));
+	sprintf(final_name, "%s/%s", cur_path, v_name);
 	fs::rename(fix_name, final_name);
 }
 
