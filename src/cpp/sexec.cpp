@@ -10,7 +10,7 @@ int main(int argc, char * argv[])
 	string comm = "$SHELL ";
 	if(!getenv(envvar)){
 		fprintf(stderr, "The environment variable %s is not set\n", envvar);
-		exit(1);
+		return 1;
 	}
 	const char * script_dir = getenv(envvar);
 	comm = comm + script_dir + "/";

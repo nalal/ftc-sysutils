@@ -1,0 +1,21 @@
+# IP of webserver
+IMG_HST=
+# Port of webserver
+IMG_PRT=
+# Webserver temp image DIR
+IMG_TMP=
+# Webserver process script
+IMG_SCR=
+
+for img in "$@"
+do
+	# If image path starts with a '/', do not add current DIR to command
+	if [[ $img == "/"* ]]
+	then
+		scp -P$IMG_PRT $img $IMG_HST:$IMG_TMP
+	else
+		scp -P$IMG_PRT $(pwd)/$img $IMG_HST:$IMG_TMP
+	fi
+done
+# Run process script
+ssh -p $IMG_PRT $IMG_HST ./$IMG_SCR

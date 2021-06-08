@@ -45,6 +45,7 @@ rmn:
 sexec:
 	@echo [Building SEXEC]
 	g++ sexec.cpp -o bin/sexec
+	@echo =REMEMBER TO SET YOUR SEXEC_DIR VARIABLE IN YOUR RC DOTFILE
 
 prep:
 	@echo [Preparing build folders]
@@ -56,6 +57,5 @@ clean:
 
 install: main
 	@echo [Installing utilities]
-	#mkdir ~/.local/bin -p
 	cp bin/* /bin
-	@echo [Utilities installed to \~/.local/bin]
+	@echo [Utilities installed to /bin]
