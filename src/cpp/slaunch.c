@@ -7,6 +7,7 @@ static char * launch_command = "steam steam://rungameid/";
 
 static int a_list_size = 1;
 
+// Add games and IDs here
 static char * game_alias_list[] = { 
 	"zomboid~108600"
 };
@@ -54,7 +55,6 @@ char * get_alias_id(char * alias)
 
 char * gen_run_comm(char * game_id, char * run_comm)
 {
-	
 	strcpy(run_comm, launch_command);
 	strcat(run_comm, game_id);
 	return run_comm;
