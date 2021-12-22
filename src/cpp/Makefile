@@ -1,4 +1,4 @@
-main: prep tcount fcount lsdir lsp yt-audio droller rname strgen namefix rmn sexec slaunch
+main: prep tcount fcount lsdir lsp yt-audio droller rname strgen namefix rmn slaunch
 	@echo  [Compiling complete.]
 
 yt-audio:
@@ -41,11 +41,6 @@ namefix:
 rmn:
 	@echo [Building RMN]
 	g++ rmn.cpp -o bin/rmn -std=gnu++17
-
-sexec:
-	@echo [Building SEXEC]
-	g++ sexec.cpp -o bin/sexec
-	@echo =REMEMBER TO SET YOUR SEXEC_DIR VARIABLE IN YOUR RC DOTFILE
 
 slaunch:
 	@echo [Building SLAUNCH]

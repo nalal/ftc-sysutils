@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 				char runline[256];
 				sprintf(
 					runline, 
-					"youtube-dl -f bestaudio %s -o '%s/\%(title)s.\%(ext)s'", 
+					"youtube-dl --throttled-rate 100K -f bestaudio %s -o '%s/\%(title)s.\%(ext)s'", 
 					argv[i], 
 					save_dir
 				);
